@@ -1,15 +1,15 @@
-// Models
+
 const { Cart } = require('../models/cart.model');
 const { Product } = require('../models/product.model');
 
-// Utils
+
 const { catchAsync } = require('../util/catchAsync');
 const { AppError } = require('../util/appError');
 
 exports.cartExists = catchAsync(async (req, res, next) => {
   const { currentUser } = req;
 
-  // Find user's cart
+ 
   const cart = await Cart.findOne({
     where: { status: 'active', userId: currentUser.id },
     include: [

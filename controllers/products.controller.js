@@ -1,8 +1,8 @@
-// Models
+
 const { Product } = require('../models/product.model');
 const { User } = require('../models/user.model');
 
-// Utils
+
 const { catchAsync } = require('../util/catchAsync');
 const { AppError } = require('../util/appError');
 const { filterObj } = require('../util/filterObj');

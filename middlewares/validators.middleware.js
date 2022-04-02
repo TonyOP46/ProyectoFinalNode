@@ -1,10 +1,10 @@
 const { body, validationResult } = require('express-validator');
 
-// Utils
+
 const { AppError } = require('../util/appError');
 const { catchAsync } = require('../util/catchAsync');
 
-// Products validations
+
 exports.createProductValidations = [
   body('title')
     .isString()
@@ -28,9 +28,7 @@ exports.createProductValidations = [
     .withMessage('Quantity must be greater than 0')
 ];
 
-// END: Products validations
 
-// Cart validations
 exports.productInCartValidation = [
   body('productId')
     .isNumeric()

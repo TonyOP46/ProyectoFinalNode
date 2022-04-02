@@ -2,13 +2,13 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
 
-// Models
+
 const { User } = require('../models/user.model');
 const { Product } = require('../models/product.model');
 const { Order } = require('../models/order.model');
 const { Cart } = require('../models/cart.model');
 
-// Utils
+
 const { catchAsync } = require('../util/catchAsync');
 const { AppError } = require('../util/appError');
 const { filterObj } = require('../util/filterObj');
@@ -18,20 +18,20 @@ dotenv.config({ path: './config.env' });
 exports.loginUser = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
 
-  // Find user given an email and has status active
+ 
   const user = await User.findOne({
     where: { email, status: 'active' }
   });
 
-  // Compare entered password vs hashed password
+  
   if (!user || !(await bcrypt.compare(password, user.password))) {
     return next(new AppError(400, 'Credentials are invalid'));
   }
 
-  // Create JWT
+
   const token = await jwt.sign(
-    { id: user.id }, // Token payload
-    process.env.JWT_SECRET, // Secret key
+    { id: user.id }, 
+    process.env.JWT_SECRET, 
     {
       expiresIn: process.env.JWT_EXPIRES_IN
     }
@@ -110,7 +110,7 @@ exports.getUsersProducts = catchAsync(async (req, res, next) => {
 });
 
 exports.getUsersOrders = catchAsync(async (req, res, next) => {
-  // Get the user in session
+  
   const { currentUser } = req;
 
   const orders = await Order.findAll({ where: { userId: currentUser.id } });

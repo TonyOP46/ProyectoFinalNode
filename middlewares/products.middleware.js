@@ -1,8 +1,7 @@
-// Models
+
 const { Product } = require('../models/product.model');
 const { User } = require('../models/user.model');
 
-// Utils
 const { AppError } = require('../util/appError');
 const { catchAsync } = require('../util/catchAsync');
 
@@ -25,10 +24,10 @@ exports.productExists = catchAsync(async (req, res, next) => {
 });
 
 exports.productOwner = catchAsync(async (req, res, next) => {
-  // Get current session user's id
+  
   const { currentUser, product } = req;
 
-  // Compare product's userId
+ 
   if (product.userId !== currentUser.id) {
     return next(new AppError(403, 'You are not the owner of this product'));
   }
